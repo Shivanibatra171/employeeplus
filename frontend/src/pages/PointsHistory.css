@@ -1,0 +1,168 @@
+.points-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding-bottom: 60px;
+}
+
+.points-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.points-hero-card {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 30px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.points-hero-left h1 {
+  margin: 0 0 6px 0;
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.points-hero-left p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #94a3b8;
+  max-width: 520px;
+}
+
+.points-hero-right {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 14px 20px;
+  text-align: right;
+  min-width: 150px;
+}
+
+.balance-tag-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #cbd5e1;
+  display: block;
+}
+
+.balance-tag-val {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.balance-tag-val span {
+  font-size: 1.3rem;
+}
+
+.balance-tag-val strong {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #facc15;
+}
+
+.balance-tag-val small {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fef08a;
+}
+
+.points-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.points-card-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.points-card-header h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.date-cell {
+  color: #64748b;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.activity-cell {
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.activity-badge-earn {
+  color: #15803d;
+}
+
+.activity-badge-redeem {
+  color: #b91c1c;
+}
+
+.points-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.points-positive {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.points-negative {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.running-bal-cell {
+  color: #1e293b;
+  font-size: 0.95rem;
+}
+
+.empty-history {
+  padding: 48px 20px;
+  text-align: center;
+  color: #64748b;
+}
+
+.points-loading {
+  padding: 40px;
+  text-align: center;
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .points-hero-card {
+    flex-direction: column;
+    gap: 18px;
+    padding: 24px;
+  }
+  .points-hero-right {
+    width: 100%;
+    text-align: left;
+  }
+  .balance-tag-val {
+    justify-content: flex-start;
+  }
+}

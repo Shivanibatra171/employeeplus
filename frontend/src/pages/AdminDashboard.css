@@ -1,0 +1,385 @@
+.admin-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding-bottom: 60px;
+}
+
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.admin-header-title h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.5px;
+}
+
+.admin-header-title p {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0 0 24px 0;
+}
+
+/* 5 Stat Cards */
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 20px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.icon-employees { background: #eff6ff; color: #3b82f6; }
+.icon-posts { background: #fdf4ff; color: #c026d3; }
+.icon-pending { background: #fffbeb; color: #d97706; }
+.icon-flagged { background: #fef2f2; color: #dc2626; }
+.icon-points { background: #f0fdf4; color: #16a34a; }
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.stat-sub {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+/* Tabs */
+.admin-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 12px;
+  overflow-x: auto;
+}
+
+.admin-tab-btn {
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #64748b;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.admin-tab-btn:hover {
+  color: #1e293b;
+  background: #e2e8f0;
+}
+
+.admin-tab-btn.active {
+  color: #4f46e5;
+  background: #eef2ff;
+  font-weight: 700;
+}
+
+.admin-card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.card-header-bar h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.sub-header-desc {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.admin-select {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.9rem;
+  background: #ffffff;
+}
+
+.sub-text {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.note-text {
+  font-size: 0.8rem;
+  color: #475569;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.action-buttons-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-action {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.btn-approve {
+  background: #dbeafe;
+  color: #1e40af;
+  border-color: #bfdbfe;
+}
+.btn-approve:hover { background: #bfdbfe; }
+
+.btn-fulfill {
+  background: #d1fae5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+.btn-fulfill:hover { background: #a7f3d0; }
+
+.btn-reject {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fecaca;
+}
+.btn-reject:hover { background: #fecaca; }
+
+.btn-hide {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: #cbd5e1;
+}
+.btn-hide:hover { background: #e2e8f0; }
+
+.btn-danger-action {
+  background: #dc2626;
+  color: #ffffff;
+}
+.btn-danger-action:hover { background: #b91c1c; }
+
+.btn-restore {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+.btn-restore:hover { background: #c7d2fe; }
+
+.btn-dismiss {
+  background: #f8fafc;
+  color: #64748b;
+  border-color: #cbd5e1;
+}
+.btn-dismiss:hover { background: #e2e8f0; }
+
+.btn-deactivate {
+  background: #fff1f2;
+  color: #e11d48;
+  border-color: #fecdd3;
+}
+
+.btn-activate {
+  background: #f0fdf4;
+  color: #16a34a;
+  border-color: #bbf7d0;
+}
+
+.fulfilled-done {
+  color: #059669;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.rejected-done {
+  color: #dc2626;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Flagged Posts */
+.flagged-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.flagged-post-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px 20px;
+  background: #ffffff;
+}
+
+.flagged-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.flagged-tags {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.report-count-badge {
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.flagged-content {
+  font-size: 0.95rem;
+  color: #1e293b;
+  background: #f8fafc;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border-left: 4px solid #ef4444;
+  margin: 0 0 12px 0;
+  font-style: italic;
+}
+
+.report-reasons-box {
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  color: #92400e;
+  margin-bottom: 14px;
+}
+
+.report-reasons-box ul {
+  margin: 6px 0 0 0;
+  padding-left: 18px;
+}
+
+.reason-time {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.flagged-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Add Reward Form */
+.add-reward-form {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.add-reward-form h4 {
+  margin: 0 0 12px 0;
+  font-size: 0.95rem;
+  color: #1e293b;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.form-row input[type="text"] {
+  flex: 2;
+  min-width: 200px;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+
+.form-row input[type="number"] {
+  flex: 1;
+  min-width: 140px;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+
+.admin-empty {
+  text-align: center;
+  padding: 40px;
+  color: #64748b;
+}
