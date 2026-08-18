@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import API from '../api/axios';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import './Auth.css';
 
 function Login() {
@@ -10,6 +11,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   const { login } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -31,7 +33,11 @@ function Login() {
         navigate('/feed');
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+      if (err.message === 'Network Error' || !err.response) {
+        setError('⚠️ Cannot connect to backend server. Please verify backend is running on http://localhost:5050.');
+      } else {
+        setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
+      }
     } finally {
       setLoading(false);
     }
@@ -44,9 +50,18 @@ function Login() {
 
   return (
     <div className="auth-container">
+      {/* Top right theme switcher */}
+      <button
+        className="auth-theme-toggle"
+        onClick={toggleTheme}
+        title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      >
+        <span>{theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}</span>
+      </button>
+
       <div className="auth-card">
         <div className="auth-brand-header">
-          <span className="auth-logo-icon">🏢</span>
+          <div className="auth-logo-icon">🏢</div>
           <h2>Employee<span className="auth-brand-plus">Plus</span></h2>
           <p className="auth-subtitle">Anonymous Feedback & Rewards Portal</p>
         </div>
@@ -59,7 +74,7 @@ function Login() {
             <input
               name="email"
               type="email"
-              placeholder="e.g. yourname@gws.com"
+              placeholder="e.g. ayesha@gws.com"
               value={form.email}
               onChange={handleChange}
               required
@@ -79,13 +94,13 @@ function Login() {
           </div>
 
           <button type="submit" className="btn-auth-submit" disabled={loading}>
-            {loading ? 'Logging in...' : 'Log In'}
+            {loading ? 'Logging in...' : 'Log In ➔'}
           </button>
         </form>
 
         {/* Demo Credentials Quick Switcher */}
         <div className="demo-credentials-box">
-          <span className="demo-title">Quick Demo Login (Click to fill):</span>
+          <span className="demo-title">⚡ Quick 1-Click Demo Login:</span>
           <div className="demo-buttons">
             <button
               type="button"

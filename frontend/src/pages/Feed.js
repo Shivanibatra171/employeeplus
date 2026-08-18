@@ -5,7 +5,12 @@ import ReportModal from '../components/ReportModal';
 import API from '../api/axios';
 import './Feed.css';
 
-const CATEGORIES = ['Complaint', 'Confession', 'Suggestion', 'Appreciation'];
+const CATEGORIES = [
+  { name: 'Suggestion', icon: '💡', pts: 8, hint: 'Idea for improvement' },
+  { name: 'Appreciation', icon: '🙌', pts: 5, hint: 'Kudos to someone/team' },
+  { name: 'Complaint', icon: '📣', pts: 5, hint: 'Issue or concern' },
+  { name: 'Confession', icon: '🤫', pts: 5, hint: 'Honest thought' },
+];
 
 function Feed() {
   const { refreshUser } = useAuth();
@@ -17,11 +22,12 @@ function Feed() {
 
   const [category, setCategory] = useState('Suggestion');
   const [content, setContent] = useState('');
-  const [isAnonymous, setIsAnonymous] = useState(true);
+  const isAnonymous = true;
   const [posting, setPosting] = useState(false);
   const [postMsg, setPostMsg] = useState('');
 
   const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
   const [ratingMsg, setRatingMsg] = useState('');
 
   // Reporting modal
@@ -91,6 +97,14 @@ function Feed() {
     }
   };
 
+  const RATING_LABELS = {
+    1: '😞 Stressful / Difficult',
+    2: '😐 Could be better',
+    3: '🙂 Good & Balanced',
+    4: '😀 Productive & Great',
+    5: '🚀 Fantastic Week!',
+  };
+
   return (
     <div className="feed-page">
       <Navbar />
@@ -103,46 +117,56 @@ function Feed() {
             {/* Create Post Card */}
             <form className="create-post-card" onSubmit={handleCreatePost}>
               <div className="card-top-title">
-                <h3>💬 Share Feedback Anonymously</h3>
-                <span className="anon-guarantee-badge">🔒 100% Anonymous</span>
+                <div className="title-with-badge">
+                  <h3>💬 Share Workplace Feedback</h3>
+                  <p className="composer-sub">Safe, candid, and 100% anonymous</p>
+                </div>
+                <div className="anon-guarantee-badge">
+                  <span className="shield-icon">🛡️</span>
+                  <span>100% Anonymous</span>
+                </div>
               </div>
 
               <div className="category-selection-row">
-                <label className="field-label">Category:</label>
+                <label className="field-label">Choose Category:</label>
                 <div className="category-buttons">
                   {CATEGORIES.map((c) => (
                     <button
-                      key={c}
+                      key={c.name}
                       type="button"
-                      className={`cat-btn ${category === c ? 'cat-active' : ''}`}
-                      onClick={() => setCategory(c)}
+                      className={`cat-btn cat-${c.name.toLowerCase()} ${category === c.name ? 'cat-active' : ''}`}
+                      onClick={() => setCategory(c.name)}
                     >
-                      {c} {c === 'Suggestion' ? '(+8 pts)' : '(+5 pts)'}
+                      <span className="cat-icon">{c.icon}</span>
+                      <span>{c.name}</span>
+                      <span className="cat-pts">+{c.pts} pts</span>
                     </button>
                   ))}
                 </div>
               </div>
 
-              <textarea
-                placeholder="What's happening in your team or company? Voice your honest feedback safely..."
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                rows={3}
-                required
-              />
+              <div className="textarea-wrapper">
+                <textarea
+                  placeholder="What's on your mind? Share suggestions, kudos to peers, or constructive feedback anonymously..."
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  rows={3}
+                  required
+                />
+              </div>
 
               <div className="create-post-footer">
                 <label className="anon-checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={isAnonymous}
-                    onChange={(e) => setIsAnonymous(e.target.checked)}
-                  />
-                  <span>Post anonymously on feed (Always enabled)</span>
+                  <span className="anon-check-icon">🔒</span>
+                  <span>Identity hidden from everyone (including HR/Admin)</span>
                 </label>
 
                 <button type="submit" className="btn-post-submit" disabled={posting}>
-                  {posting ? 'Posting...' : 'Share Anonymously'}
+                  {posting ? (
+                    <span>Posting...</span>
+                  ) : (
+                    <span>Publish Anonymously ➔</span>
+                  )}
                 </button>
               </div>
 
@@ -160,18 +184,18 @@ function Feed() {
                 </button>
                 {CATEGORIES.map((c) => (
                   <button
-                    key={c}
-                    className={`pill-btn ${filterCategory === c ? 'pill-active' : ''}`}
-                    onClick={() => setFilterCategory(c)}
+                    key={c.name}
+                    className={`pill-btn ${filterCategory === c.name ? 'pill-active' : ''}`}
+                    onClick={() => setFilterCategory(c.name)}
                   >
-                    {c}
+                    <span>{c.icon}</span> {c.name}
                   </button>
                 ))}
               </div>
 
               <div className="sort-box">
-                <span>Sort by:</span>
-                <select value={sort} onChange={(e) => setSort(e.target.value)}>
+                <span className="sort-label">Sort:</span>
+                <select value={sort} onChange={(e) => setSort(e.target.value)} className="sort-dropdown">
                   <option value="newest">🕒 Newest First</option>
                   <option value="upvoted">🔥 Most Upvoted</option>
                 </select>
@@ -180,25 +204,38 @@ function Feed() {
 
             {/* Posts List */}
             {loadingFeed ? (
-              <div className="feed-loading">Loading anonymous posts...</div>
+              <div className="feed-loading">
+                <div className="spinner"></div>
+                <span>Loading workplace feed...</span>
+              </div>
             ) : posts.length === 0 ? (
               <div className="empty-feed-card">
-                <p>No feedback posts found in this category.</p>
-                <span>Be the first employee to share feedback anonymously!</span>
+                <div className="empty-icon">💬</div>
+                <h3>No feedback in this category yet</h3>
+                <p>Be the first coworker to share anonymous feedback and earn bonus reward points!</p>
               </div>
             ) : (
               <div className="post-list">
                 {posts.map((post) => (
-                  <div key={post.id} className="post-card">
+                  <article key={post.id} className="post-card">
                     <div className="post-card-top">
                       <div className="post-meta-left">
-                        <span className={`category-tag category-${post.category.toLowerCase()}`}>
-                          {post.category}
-                        </span>
-                        <span className="anon-author-tag">🔒 Anonymous Coworker</span>
+                        <div className="anon-avatar-bubble">
+                          <span>🔒</span>
+                        </div>
+                        <div>
+                          <div className="anon-author-title">Anonymous Coworker</div>
+                          <span className="post-date">
+                            {new Date(post.created_at).toLocaleDateString(undefined, {
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </span>
+                        </div>
                       </div>
-                      <span className="post-date">
-                        {new Date(post.created_at).toLocaleDateString()}
+
+                      <span className={`category-tag category-${post.category.toLowerCase()}`}>
+                        {post.category}
                       </span>
                     </div>
 
@@ -206,22 +243,24 @@ function Feed() {
 
                     <div className="post-card-bottom">
                       <button
-                        className="upvote-btn"
+                        className={`upvote-btn ${post.upvotes > 0 ? 'has-upvotes' : ''}`}
                         onClick={() => handleUpvote(post.id)}
                         title="Upvote this post"
                       >
-                        ▲ {post.upvotes} {post.upvotes === 1 ? 'Upvote' : 'Upvotes'}
+                        <span className="upvote-arrow">▲</span>
+                        <span className="upvote-count">{post.upvotes}</span>
+                        <span className="upvote-label">{post.upvotes === 1 ? 'Upvote' : 'Upvotes'}</span>
                       </button>
 
                       <button
                         className="report-btn"
                         onClick={() => setReportingPostId(post.id)}
-                        title="Report this post to Admin"
+                        title="Report inappropriate post to HR/Admin"
                       >
                         🚩 Report
                       </button>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             )}
@@ -230,16 +269,23 @@ function Feed() {
           {/* Right Sidebar: Weekly Rating & Info */}
           <aside className="feed-sidebar">
             <div className="sidebar-card rating-card">
-              <h4>⭐ Weekly Pulse Rating</h4>
-              <p className="sidebar-desc">How was your week at work? Rate anonymously to earn <strong>+2 points</strong>!</p>
+              <div className="sidebar-card-header">
+                <span className="sidebar-badge-icon">⭐</span>
+                <h4>Weekly Pulse Check</h4>
+              </div>
+              <p className="sidebar-desc">
+                How was your work experience this week? Rate to earn <strong>+2 points</strong>!
+              </p>
 
               <div className="stars-row">
                 {[1, 2, 3, 4, 5].map((n) => (
                   <button
                     key={n}
                     type="button"
-                    className={`star-btn ${n <= rating ? 'star-filled' : ''}`}
+                    className={`star-btn ${(hoverRating || rating) >= n ? 'star-filled' : ''}`}
                     onClick={() => handleRating(n)}
+                    onMouseEnter={() => setHoverRating(n)}
+                    onMouseLeave={() => setHoverRating(0)}
                     title={`Rate ${n} stars`}
                   >
                     ★
@@ -247,17 +293,39 @@ function Feed() {
                 ))}
               </div>
 
+              <div className="star-mood-text">
+                {(hoverRating || rating) ? RATING_LABELS[hoverRating || rating] : 'Tap a star to rate'}
+              </div>
+
               {ratingMsg && <div className="rating-feedback">{ratingMsg}</div>}
             </div>
 
             <div className="sidebar-card points-rules-card">
-              <h4>🪙 How to Earn Points</h4>
+              <div className="sidebar-card-header">
+                <span className="sidebar-badge-icon">🪙</span>
+                <h4>How to Earn Points</h4>
+              </div>
               <ul className="points-rules-list">
-                <li><span>Suggestion Post:</span> <strong>+8 pts</strong></li>
-                <li><span>Complaint / Confession / Appreciation:</span> <strong>+5 pts</strong></li>
-                <li><span>Post Reaches 15+ Upvotes:</span> <strong>+15 pts</strong></li>
-                <li><span>Weekly Pulse Rating:</span> <strong>+2 pts</strong></li>
-                <li><span>Daily Login:</span> <strong>+1 pt</strong></li>
+                <li>
+                  <span className="rule-name">💡 Suggestion Post</span>
+                  <span className="rule-pts">+8 pts</span>
+                </li>
+                <li>
+                  <span className="rule-name">💬 Appreciation / Other Post</span>
+                  <span className="rule-pts">+5 pts</span>
+                </li>
+                <li>
+                  <span className="rule-name">🔥 Post Reaches 15+ Upvotes</span>
+                  <span className="rule-pts">+15 pts</span>
+                </li>
+                <li>
+                  <span className="rule-name">⭐ Weekly Pulse Rating</span>
+                  <span className="rule-pts">+2 pts</span>
+                </li>
+                <li>
+                  <span className="rule-name">⚡ Daily Active Login</span>
+                  <span className="rule-pts">+1 pt</span>
+                </li>
               </ul>
             </div>
           </aside>

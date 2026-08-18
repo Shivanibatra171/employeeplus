@@ -130,20 +130,27 @@ function Rewards() {
         </div>
 
         {loading ? (
-          <div className="rewards-loading">Loading rewards...</div>
+          <div className="rewards-loading">
+            <div className="spinner"></div>
+            <span>Loading rewards catalog...</span>
+          </div>
         ) : activeTab === 'catalog' ? (
           /* Catalog Grid */
           <div className="rewards-grid">
             {rewards.map((reward) => {
-              const affordable = (user?.points_balance || 0) >= reward.points_required;
-              const pointsNeeded = reward.points_required - (user?.points_balance || 0);
+              const currentBalance = user?.points_balance || 0;
+              const affordable = currentBalance >= reward.points_required;
+              const pointsNeeded = reward.points_required - currentBalance;
+              const percent = Math.min(100, Math.round((currentBalance / reward.points_required) * 100));
 
               return (
                 <div key={reward.id} className={`reward-card ${affordable ? 'affordable' : 'locked'}`}>
                   <div className="reward-card-header">
-                    <span className="reward-icon">
-                      {REWARD_ICONS[reward.name] || '🎁'}
-                    </span>
+                    <div className="reward-icon-box">
+                      <span className="reward-icon">
+                        {REWARD_ICONS[reward.name] || '🎁'}
+                      </span>
+                    </div>
                     <span className="reward-cost">
                       🪙 {reward.points_required} pts
                     </span>
@@ -152,8 +159,23 @@ function Rewards() {
                   <h3 className="reward-title">{reward.name}</h3>
 
                   <p className="reward-desc">
-                    Eligible for all employees across all company services.
+                    Eligible for all active employees. Quick HR approval and voucher fulfillment.
                   </p>
+
+                  <div className="reward-progress-box">
+                    <div className="progress-info">
+                      <span className="progress-label">
+                        {affordable ? '✅ Ready to Claim' : `${pointsNeeded} more pts needed`}
+                      </span>
+                      <span className="progress-pct">{percent}%</span>
+                    </div>
+                    <div className="progress-track">
+                      <div
+                        className={`progress-fill ${affordable ? 'progress-complete' : ''}`}
+                        style={{ width: `${percent}%` }}
+                      ></div>
+                    </div>
+                  </div>
 
                   <div className="reward-card-footer">
                     {affordable ? (
@@ -161,11 +183,11 @@ function Rewards() {
                         className="btn-redeem"
                         onClick={() => handleRedeemClick(reward)}
                       >
-                        Redeem Now
+                        Claim Reward Now ➔
                       </button>
                     ) : (
                       <button className="btn-locked" disabled>
-                        🔒 Need {pointsNeeded} more pts
+                        <span>🔒 In Progress ({percent}%)</span>
                       </button>
                     )}
                   </div>
@@ -178,8 +200,10 @@ function Rewards() {
           <div className="redemptions-section">
             {myRedemptions.length === 0 ? (
               <div className="empty-state">
-                <p>You haven't requested any rewards yet.</p>
-                <button className="btn-secondary" onClick={() => setActiveTab('catalog')}>
+                <div className="empty-state-icon">🎁</div>
+                <h3>No Redemptions Yet</h3>
+                <p>You haven't requested any rewards yet. Participate in the feed to earn points!</p>
+                <button className="btn-browse-catalog" onClick={() => setActiveTab('catalog')}>
                   Browse Rewards Catalog
                 </button>
               </div>
@@ -199,13 +223,15 @@ function Rewards() {
                     {myRedemptions.map((item) => (
                       <tr key={item.id}>
                         <td className="font-semibold">
-                          <span style={{ marginRight: 8 }}>
+                          <span className="table-reward-icon">
                             {REWARD_ICONS[item.reward_name] || '🎁'}
                           </span>
-                          {item.reward_name}
+                          <span>{item.reward_name}</span>
                         </td>
-                        <td>🪙 {item.points_required} pts</td>
-                        <td>{new Date(item.requested_at).toLocaleDateString()} {new Date(item.requested_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+                        <td className="points-spent-cell">🪙 {item.points_required} pts</td>
+                        <td className="date-cell">
+                          {new Date(item.requested_at).toLocaleDateString()} {new Date(item.requested_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        </td>
                         <td>
                           <span className={`status-badge ${getStatusClass(item.status)}`}>
                             {item.status}
@@ -215,7 +241,7 @@ function Rewards() {
                           {item.note ? item.note : <span className="text-muted">—</span>}
                           {item.fulfilled_at && (
                             <div className="fulfilled-subtext">
-                              Fulfilled on {new Date(item.fulfilled_at).toLocaleDateString()}
+                              ✓ Fulfilled on {new Date(item.fulfilled_at).toLocaleDateString()}
                             </div>
                           )}
                         </td>

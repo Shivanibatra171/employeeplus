@@ -161,6 +161,8 @@ const submitRating = async (req, res) => {
   } finally {
     client.release();
   }
+};
+
 // REPORT / FLAG A POST (Module 4)
 const reportPost = async (req, res) => {
   const { id } = req.params;

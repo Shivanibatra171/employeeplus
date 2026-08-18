@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import API from '../api/axios';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import './Auth.css';
 
 function Signup() {
@@ -17,6 +18,7 @@ function Signup() {
   const [loading, setLoading] = useState(false);
 
   const { login } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -33,7 +35,11 @@ function Signup() {
       login(res.data.token, res.data.user);
       navigate('/feed');
     } catch (err) {
-      setError(err.response?.data?.message || 'Signup failed. Please try again.');
+      if (err.message === 'Network Error' || !err.response) {
+        setError('⚠️ Cannot connect to backend server. Please verify backend is running on http://localhost:5050.');
+      } else {
+        setError(err.response?.data?.message || 'Signup failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -41,9 +47,18 @@ function Signup() {
 
   return (
     <div className="auth-container">
+      {/* Top right theme switcher */}
+      <button
+        className="auth-theme-toggle"
+        onClick={toggleTheme}
+        title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+      >
+        <span>{theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}</span>
+      </button>
+
       <div className="auth-card">
         <div className="auth-brand-header">
-          <span className="auth-logo-icon">🏢</span>
+          <div className="auth-logo-icon">🏢</div>
           <h2>Employee<span className="auth-brand-plus">Plus</span></h2>
           <p className="auth-subtitle">Create your anonymous employee account</p>
         </div>

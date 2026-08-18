@@ -53,6 +53,7 @@ function AdminDashboard() {
 
   useEffect(() => {
     fetchDashboardData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [redemptionFilter]);
 
   // Handle redemption status updates
