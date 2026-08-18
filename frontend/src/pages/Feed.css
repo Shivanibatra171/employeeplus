@@ -140,7 +140,7 @@
   background: var(--primary-600);
   color: #ffffff;
   border-color: var(--primary-700);
-  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
 }
 
 .cat-btn.cat-active .cat-pts {
@@ -175,9 +175,9 @@
 }
 
 [data-theme="dark"] .create-post-card textarea:focus {
-  background: #0d1527;
+  background: #0f151c;
   border-color: var(--primary-400);
-  box-shadow: 0 0 0 3.5px rgba(99, 102, 241, 0.25);
+  box-shadow: 0 0 0 3.5px rgba(16, 185, 129, 0.25);
 }
 
 .create-post-footer {
@@ -207,7 +207,7 @@
   font-weight: 700;
   font-size: 0.92rem;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
   transition: all 0.15s ease;
   display: inline-flex;
   align-items: center;
@@ -216,12 +216,12 @@
 
 .btn-post-submit:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
   background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-800) 100%);
 }
 
 .btn-post-submit:disabled {
-  background: #a5b4fc;
+  background: #6ee7b7;
   box-shadow: none;
   cursor: not-allowed;
   transform: none;
@@ -256,7 +256,7 @@
 }
 
 .pill-btn {
-  background: #ffffff;
+  background: var(--bg-surface);
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
   padding: 7px 16px;
@@ -271,14 +271,14 @@
 .pill-btn:hover {
   background: var(--bg-subtle);
   color: var(--text-primary);
-  border-color: #cbd5e1;
+  border-color: var(--border-color);
 }
 
 .pill-btn.pill-active {
-  background: var(--text-primary);
+  background: var(--primary-600);
   color: #ffffff;
-  border-color: var(--text-primary);
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
+  border-color: var(--primary-600);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
 .sort-box {
@@ -297,7 +297,7 @@
   padding: 7px 14px;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  background: #ffffff;
+  background: var(--bg-surface);
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-primary);

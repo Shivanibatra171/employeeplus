@@ -80,7 +80,7 @@
 }
 
 .auth-brand-plus {
-  background: linear-gradient(135deg, var(--primary-600) 0%, #a855f7 100%);
+  background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-700) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -166,18 +166,18 @@
   font-weight: 700;
   cursor: pointer;
   margin-top: 14px;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
   transition: all 0.15s ease;
 }
 
 .btn-auth-submit:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
   background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-800) 100%);
 }
 
 .btn-auth-submit:disabled {
-  background: #a5b4fc;
+  background: #6ee7b7;
   box-shadow: none;
   cursor: not-allowed;
   transform: none;

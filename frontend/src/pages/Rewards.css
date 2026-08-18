@@ -12,7 +12,7 @@
 
 /* Hero Banner */
 .rewards-hero {
-  background: linear-gradient(135deg, #312e81 0%, #4338ca 50%, #6366f1 100%);
+  background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
   border-radius: var(--radius-xl);
   padding: 36px 40px;
   color: #ffffff;
@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 32px;
-  box-shadow: 0 12px 28px -6px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 12px 28px -6px rgba(16, 185, 129, 0.35);
   position: relative;
   overflow: hidden;
 }
@@ -291,13 +291,13 @@
   font-weight: 700;
   font-size: 0.95rem;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
   transition: all 0.15s ease;
 }
 
 .btn-redeem:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
   background: linear-gradient(135deg, var(--primary-700) 0%, var(--primary-800) 100%);
 }
 
