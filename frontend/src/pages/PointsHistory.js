@@ -25,13 +25,12 @@ function PointsHistory() {
       <main className="points-container">
         <div className="points-hero-card">
           <div className="points-hero-left">
-            <h1>🪙 Points Activity & Ledger</h1>
+            <h1>Points Activity & Ledger</h1>
             <p>Complete transparent record of every action you took, points earned, and rewards redeemed.</p>
           </div>
           <div className="points-hero-right">
             <span className="balance-tag-title">Verified Balance</span>
             <div className="balance-tag-val">
-              <span>🪙</span>
               <strong>{currentBalance}</strong>
               <small>pts</small>
             </div>
@@ -69,9 +68,9 @@ function PointsHistory() {
                       </td>
                       <td className="activity-cell">
                         {row.points >= 0 ? (
-                          <span className="activity-badge-earn">✨ {row.activity}</span>
+                          <span className="activity-badge-earn">{row.activity}</span>
                         ) : (
-                          <span className="activity-badge-redeem">🎁 {row.activity}</span>
+                          <span className="activity-badge-redeem">{row.activity}</span>
                         )}
                       </td>
                       <td>
@@ -80,7 +79,7 @@ function PointsHistory() {
                         </span>
                       </td>
                       <td className="running-bal-cell">
-                        <strong>🪙 {row.runningBalance} pts</strong>
+                        <strong>{row.runningBalance} pts</strong>
                       </td>
                     </tr>
                   ))}

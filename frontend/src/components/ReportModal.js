@@ -38,7 +38,7 @@ function ReportModal({ postId, onClose, onSuccess }) {
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-card" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h3>🚩 Report Post to HR/Admin</h3>
+          <h3>Report Post to HR/Admin</h3>
           <button className="modal-close-btn" onClick={onClose}>✕</button>
         </div>
 

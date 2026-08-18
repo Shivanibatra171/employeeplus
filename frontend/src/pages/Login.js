@@ -34,7 +34,7 @@ function Login() {
       }
     } catch (err) {
       if (err.message === 'Network Error' || !err.response) {
-        setError('⚠️ Cannot connect to backend server. Please verify backend is running on http://localhost:5050.');
+        setError('Cannot connect to backend server. Please verify backend is running on http://localhost:5050.');
       } else {
         setError(err.response?.data?.message || 'Login failed. Please check your credentials.');
       }
@@ -56,12 +56,11 @@ function Login() {
         onClick={toggleTheme}
         title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       >
-        <span>{theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}</span>
+        <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
       </button>
 
       <div className="auth-card">
         <div className="auth-brand-header">
-          <div className="auth-logo-icon">🏢</div>
           <h2>Employee<span className="auth-brand-plus">Plus</span></h2>
           <p className="auth-subtitle">Anonymous Feedback & Rewards Portal</p>
         </div>
@@ -100,21 +99,21 @@ function Login() {
 
         {/* Demo Credentials Quick Switcher */}
         <div className="demo-credentials-box">
-          <span className="demo-title">⚡ Quick 1-Click Demo Login:</span>
+          <span className="demo-title">Quick 1-Click Demo Login:</span>
           <div className="demo-buttons">
             <button
               type="button"
               className="btn-demo-pill demo-emp"
               onClick={() => fillDemo('ayesha@gws.com', 'Password@123')}
             >
-              👤 Employee (Ayesha)
+              Employee (Ayesha)
             </button>
             <button
               type="button"
               className="btn-demo-pill demo-admin"
               onClick={() => fillDemo('admin@gws.com', 'Admin@123')}
             >
-              🛡️ Admin / HR
+              Admin / HR
             </button>
           </div>
         </div>

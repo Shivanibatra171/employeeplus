@@ -131,14 +131,13 @@ function AdminDashboard() {
       <main className="admin-container">
         <div className="admin-header-title">
           <div>
-            <h1>🛡️ Admin & HR Moderation Center</h1>
+            <h1>Admin & HR Moderation Center</h1>
             <p>Manage employee rewards redemptions, moderate reported feedback, and oversee system metrics.</p>
           </div>
         </div>
 
         {message.text && (
           <div className={`ep-alert ${message.type === 'success' ? 'alert-success' : 'alert-error'}`}>
-            {message.type === 'success' ? '✅ ' : '⚠️ '}
             {message.text}
           </div>
         )}
@@ -146,7 +145,6 @@ function AdminDashboard() {
         {/* 5 Metric Summary Cards */}
         <div className="admin-stats-grid">
           <div className="stat-card">
-            <div className="stat-icon-wrapper icon-employees">👥</div>
             <div className="stat-info">
               <span className="stat-label">Total Employees</span>
               <span className="stat-value">{stats.totalEmployees}</span>
@@ -154,7 +152,6 @@ function AdminDashboard() {
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon-wrapper icon-posts">📝</div>
             <div className="stat-info">
               <span className="stat-label">Posts This Month</span>
               <span className="stat-value">{stats.totalPostsThisMonth}</span>
@@ -162,7 +159,6 @@ function AdminDashboard() {
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon-wrapper icon-pending">🎁</div>
             <div className="stat-info">
               <span className="stat-label">Pending Redemptions</span>
               <span className="stat-value">{stats.pendingRedemptions}</span>
@@ -170,7 +166,6 @@ function AdminDashboard() {
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon-wrapper icon-flagged">🚩</div>
             <div className="stat-info">
               <span className="stat-label">Flagged Posts</span>
               <span className="stat-value">{stats.flaggedPosts}</span>
@@ -178,7 +173,6 @@ function AdminDashboard() {
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon-wrapper icon-points">🪙</div>
             <div className="stat-info">
               <span className="stat-label">Points Distributed</span>
               <span className="stat-value">{stats.pointsDistributedThisMonth} <span className="stat-sub">pts</span></span>
@@ -192,19 +186,19 @@ function AdminDashboard() {
             className={`admin-tab-btn ${activeTab === 'redemptions' ? 'active' : ''}`}
             onClick={() => setActiveTab('redemptions')}
           >
-            🎁 Redemptions Requests ({stats.pendingRedemptions} Pending)
+            Redemption Requests ({stats.pendingRedemptions} Pending)
           </button>
           <button
             className={`admin-tab-btn ${activeTab === 'moderation' ? 'active' : ''}`}
             onClick={() => setActiveTab('moderation')}
           >
-            🚩 Moderation Queue ({flaggedPosts.length} Reported)
+            Moderation Queue ({flaggedPosts.length} Reported)
           </button>
           <button
             className={`admin-tab-btn ${activeTab === 'rewards' ? 'active' : ''}`}
             onClick={() => setActiveTab('rewards')}
           >
-            🛍️ Rewards Catalog ({catalogRewards.length})
+            Rewards Catalog ({catalogRewards.length})
           </button>
         </div>
 
@@ -259,7 +253,7 @@ function AdminDashboard() {
                           <div className="sub-text">{r.organization}</div>
                         </td>
                         <td><strong>{r.reward_name}</strong></td>
-                        <td>🪙 {r.points_required}</td>
+                        <td>{r.points_required} pts</td>
                         <td>{new Date(r.requested_at).toLocaleDateString()} {new Date(r.requested_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
                         <td>
                           <span className={`status-badge status-${r.status.toLowerCase()}`}>
@@ -299,7 +293,7 @@ function AdminDashboard() {
                             )}
 
                             {r.status === 'Fulfilled' && (
-                              <span className="fulfilled-done">✓ Completed</span>
+                              <span className="fulfilled-done">Completed</span>
                             )}
 
                             {r.status === 'Rejected' && (
@@ -321,13 +315,13 @@ function AdminDashboard() {
               <div>
                 <h3>Reported Posts Queue</h3>
                 <p className="sub-header-desc">
-                  🔒 Strict Anonymity Guard: Authors are never revealed. Review reported content and take moderation actions.
+                  Strict Anonymity Guard: Authors are never revealed. Review reported content and take moderation actions.
                 </p>
               </div>
             </div>
 
             {flaggedPosts.length === 0 ? (
-              <div className="admin-empty">🎉 All clean! No posts are currently flagged.</div>
+              <div className="admin-empty">All clean! No posts are currently flagged.</div>
             ) : (
               <div className="flagged-posts-list">
                 {flaggedPosts.map((post) => (
@@ -338,7 +332,7 @@ function AdminDashboard() {
                           {post.category}
                         </span>
                         <span className="report-count-badge">
-                          🚩 {post.report_count} Report{post.report_count > 1 ? 's' : ''}
+                          {post.report_count} Report{post.report_count > 1 ? 's' : ''}
                         </span>
                         <span className={`status-badge status-${post.status}`}>
                           Status: {post.status}
@@ -369,13 +363,13 @@ function AdminDashboard() {
                             className="btn-action btn-hide"
                             onClick={() => handleUpdatePostStatus(post.id, 'hidden')}
                           >
-                            👁️ Hide from Feed
+                            Hide from Feed
                           </button>
                           <button
                             className="btn-action btn-danger-action"
                             onClick={() => handleUpdatePostStatus(post.id, 'removed')}
                           >
-                            🗑️ Remove Post
+                            Remove Post
                           </button>
                         </>
                       ) : (
@@ -383,7 +377,7 @@ function AdminDashboard() {
                           className="btn-action btn-restore"
                           onClick={() => handleUpdatePostStatus(post.id, 'active')}
                         >
-                          ♻️ Restore to Feed
+                          Restore to Feed
                         </button>
                       )}
 
@@ -391,7 +385,7 @@ function AdminDashboard() {
                         className="btn-action btn-dismiss"
                         onClick={() => handleDismissReports(post.id)}
                       >
-                        ✓ Dismiss Flags
+                        Dismiss Flags
                       </button>
                     </div>
                   </div>
@@ -445,7 +439,7 @@ function AdminDashboard() {
                   {catalogRewards.map((reward) => (
                     <tr key={reward.id}>
                       <td><strong>{reward.name}</strong></td>
-                      <td>🪙 {reward.points_required} pts</td>
+                      <td>{reward.points_required} pts</td>
                       <td>
                         <span className={`status-badge status-${reward.status}`}>
                           {reward.status}
@@ -478,7 +472,7 @@ function AdminDashboard() {
             </div>
             <div className="modal-body">
               <p>
-                Rejecting this request will automatically <strong>refund 🪙 {rejectingItem.points_required} points</strong> back to <strong>{rejectingItem.employee_name}</strong>.
+                Rejecting this request will automatically <strong>refund {rejectingItem.points_required} points</strong> back to <strong>{rejectingItem.employee_name}</strong>.
               </p>
               <label className="modal-label">Rejection Reason / Note:</label>
               <textarea

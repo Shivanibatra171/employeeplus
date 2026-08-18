@@ -36,7 +36,7 @@ function Signup() {
       navigate('/feed');
     } catch (err) {
       if (err.message === 'Network Error' || !err.response) {
-        setError('⚠️ Cannot connect to backend server. Please verify backend is running on http://localhost:5050.');
+        setError('Cannot connect to backend server. Please verify backend is running on http://localhost:5050.');
       } else {
         setError(err.response?.data?.message || 'Signup failed. Please try again.');
       }
@@ -53,12 +53,11 @@ function Signup() {
         onClick={toggleTheme}
         title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       >
-        <span>{theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode'}</span>
+        <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
       </button>
 
       <div className="auth-card">
         <div className="auth-brand-header">
-          <div className="auth-logo-icon">🏢</div>
           <h2>Employee<span className="auth-brand-plus">Plus</span></h2>
           <p className="auth-subtitle">Create your anonymous employee account</p>
         </div>

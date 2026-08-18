@@ -6,10 +6,10 @@ import API from '../api/axios';
 import './Feed.css';
 
 const CATEGORIES = [
-  { name: 'Suggestion', icon: '💡', pts: 8, hint: 'Idea for improvement' },
-  { name: 'Appreciation', icon: '🙌', pts: 5, hint: 'Kudos to someone/team' },
-  { name: 'Complaint', icon: '📣', pts: 5, hint: 'Issue or concern' },
-  { name: 'Confession', icon: '🤫', pts: 5, hint: 'Honest thought' },
+  { name: 'Suggestion', pts: 8, hint: 'Idea for improvement' },
+  { name: 'Appreciation', pts: 5, hint: 'Kudos to someone/team' },
+  { name: 'Complaint', pts: 5, hint: 'Issue or concern' },
+  { name: 'Confession', pts: 5, hint: 'Honest thought' },
 ];
 
 function Feed() {
@@ -66,7 +66,7 @@ function Feed() {
         is_anonymous: isAnonymous,
       });
       setContent('');
-      setPostMsg(`🎉 Posted! +${res.data.pointsEarned} points earned.`);
+      setPostMsg(`Posted successfully! +${res.data.pointsEarned} points earned.`);
       fetchFeed();
       if (refreshUser) refreshUser();
     } catch (err) {
@@ -90,7 +90,7 @@ function Feed() {
     setRating(stars);
     try {
       const res = await API.post('/posts/rating', { rating: stars });
-      setRatingMsg(`✨ Thanks for rating! +${res.data.pointsEarned} points earned.`);
+      setRatingMsg(`Thanks for rating! +${res.data.pointsEarned} points earned.`);
       if (refreshUser) refreshUser();
     } catch (err) {
       setRatingMsg(err.response?.data?.message || 'Failed to submit rating');
@@ -98,11 +98,11 @@ function Feed() {
   };
 
   const RATING_LABELS = {
-    1: '😞 Stressful / Difficult',
-    2: '😐 Could be better',
-    3: '🙂 Good & Balanced',
-    4: '😀 Productive & Great',
-    5: '🚀 Fantastic Week!',
+    1: 'Stressful / Difficult',
+    2: 'Could be better',
+    3: 'Good & Balanced',
+    4: 'Productive & Great',
+    5: 'Fantastic Week!',
   };
 
   return (
@@ -118,11 +118,10 @@ function Feed() {
             <form className="create-post-card" onSubmit={handleCreatePost}>
               <div className="card-top-title">
                 <div className="title-with-badge">
-                  <h3>💬 Share Workplace Feedback</h3>
+                  <h3>Share Workplace Feedback</h3>
                   <p className="composer-sub">Safe, candid, and 100% anonymous</p>
                 </div>
                 <div className="anon-guarantee-badge">
-                  <span className="shield-icon">🛡️</span>
                   <span>100% Anonymous</span>
                 </div>
               </div>
@@ -137,8 +136,7 @@ function Feed() {
                       className={`cat-btn cat-${c.name.toLowerCase()} ${category === c.name ? 'cat-active' : ''}`}
                       onClick={() => setCategory(c.name)}
                     >
-                      <span className="cat-icon">{c.icon}</span>
-                      <span>{c.name}</span>
+                      <span className="cat-name">{c.name}</span>
                       <span className="cat-pts">+{c.pts} pts</span>
                     </button>
                   ))}
@@ -157,7 +155,6 @@ function Feed() {
 
               <div className="create-post-footer">
                 <label className="anon-checkbox-label">
-                  <span className="anon-check-icon">🔒</span>
                   <span>Identity hidden from everyone (including HR/Admin)</span>
                 </label>
 
@@ -188,7 +185,7 @@ function Feed() {
                     className={`pill-btn ${filterCategory === c.name ? 'pill-active' : ''}`}
                     onClick={() => setFilterCategory(c.name)}
                   >
-                    <span>{c.icon}</span> {c.name}
+                    {c.name}
                   </button>
                 ))}
               </div>
@@ -196,8 +193,8 @@ function Feed() {
               <div className="sort-box">
                 <span className="sort-label">Sort:</span>
                 <select value={sort} onChange={(e) => setSort(e.target.value)} className="sort-dropdown">
-                  <option value="newest">🕒 Newest First</option>
-                  <option value="upvoted">🔥 Most Upvoted</option>
+                  <option value="newest">Newest First</option>
+                  <option value="upvoted">Most Upvoted</option>
                 </select>
               </div>
             </div>
@@ -210,7 +207,6 @@ function Feed() {
               </div>
             ) : posts.length === 0 ? (
               <div className="empty-feed-card">
-                <div className="empty-icon">💬</div>
                 <h3>No feedback in this category yet</h3>
                 <p>Be the first coworker to share anonymous feedback and earn bonus reward points!</p>
               </div>
@@ -221,7 +217,7 @@ function Feed() {
                     <div className="post-card-top">
                       <div className="post-meta-left">
                         <div className="anon-avatar-bubble">
-                          <span>🔒</span>
+                          <span>A</span>
                         </div>
                         <div>
                           <div className="anon-author-title">Anonymous Coworker</div>
@@ -257,7 +253,7 @@ function Feed() {
                         onClick={() => setReportingPostId(post.id)}
                         title="Report inappropriate post to HR/Admin"
                       >
-                        🚩 Report
+                        Report
                       </button>
                     </div>
                   </article>
@@ -270,7 +266,6 @@ function Feed() {
           <aside className="feed-sidebar">
             <div className="sidebar-card rating-card">
               <div className="sidebar-card-header">
-                <span className="sidebar-badge-icon">⭐</span>
                 <h4>Weekly Pulse Check</h4>
               </div>
               <p className="sidebar-desc">
@@ -302,28 +297,27 @@ function Feed() {
 
             <div className="sidebar-card points-rules-card">
               <div className="sidebar-card-header">
-                <span className="sidebar-badge-icon">🪙</span>
                 <h4>How to Earn Points</h4>
               </div>
               <ul className="points-rules-list">
                 <li>
-                  <span className="rule-name">💡 Suggestion Post</span>
+                  <span className="rule-name">Suggestion Post</span>
                   <span className="rule-pts">+8 pts</span>
                 </li>
                 <li>
-                  <span className="rule-name">💬 Appreciation / Other Post</span>
+                  <span className="rule-name">Appreciation / Other Post</span>
                   <span className="rule-pts">+5 pts</span>
                 </li>
                 <li>
-                  <span className="rule-name">🔥 Post Reaches 15+ Upvotes</span>
+                  <span className="rule-name">Post Reaches 15+ Upvotes</span>
                   <span className="rule-pts">+15 pts</span>
                 </li>
                 <li>
-                  <span className="rule-name">⭐ Weekly Pulse Rating</span>
+                  <span className="rule-name">Weekly Pulse Rating</span>
                   <span className="rule-pts">+2 pts</span>
                 </li>
                 <li>
-                  <span className="rule-name">⚡ Daily Active Login</span>
+                  <span className="rule-name">Daily Active Login</span>
                   <span className="rule-pts">+1 pt</span>
                 </li>
               </ul>
@@ -339,7 +333,7 @@ function Feed() {
           onClose={() => setReportingPostId(null)}
           onSuccess={() => {
             setReportingPostId(null);
-            setToast('🚩 Thank you. Your report was sent to HR/Admin for review.');
+            setToast('Thank you. Your report was sent to HR/Admin for review.');
             setTimeout(() => setToast(''), 4000);
           }}
         />

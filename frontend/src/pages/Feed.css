@@ -74,9 +74,9 @@
 }
 
 .anon-guarantee-badge {
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  color: #166534;
+  background: var(--primary-50);
+  border: 1px solid var(--primary-200);
+  color: var(--primary-700);
   font-size: 0.76rem;
   font-weight: 700;
   padding: 5px 12px;
@@ -84,7 +84,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  box-shadow: 0 1px 2px rgba(22, 101, 52, 0.06);
+  box-shadow: 0 1px 2px rgba(79, 70, 229, 0.06);
 }
 
 .category-selection-row {
@@ -375,30 +375,18 @@
   letter-spacing: 0.5px;
   padding: 5px 12px;
   border-radius: var(--radius-full);
-}
-
-.category-suggestion {
   background: var(--primary-50);
   color: var(--primary-700);
   border: 1px solid var(--primary-200);
 }
 
-.category-appreciation {
-  background: #ecfdf5;
-  color: #065f46;
-  border: 1px solid #a7f3d0;
-}
-
-.category-complaint {
-  background: #fef2f2;
-  color: #991b1b;
-  border: 1px solid #fecaca;
-}
-
+.category-suggestion,
+.category-appreciation,
+.category-complaint,
 .category-confession {
-  background: #fffbeb;
-  color: #92400e;
-  border: 1px solid #fde68a;
+  background: var(--primary-50);
+  color: var(--primary-700);
+  border: 1px solid var(--primary-200);
 }
 
 .post-content {
@@ -589,9 +577,10 @@
 }
 
 .rule-pts {
-  color: #15803d;
+  color: var(--primary-700);
   font-weight: 800;
-  background: #f0fdf4;
+  background: var(--primary-50);
+  border: 1px solid var(--primary-200);
   padding: 2px 8px;
   border-radius: var(--radius-sm);
   font-size: 0.8rem;

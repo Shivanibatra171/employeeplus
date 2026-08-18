@@ -4,14 +4,6 @@ import Navbar from '../components/Navbar';
 import API from '../api/axios';
 import './Rewards.css';
 
-const REWARD_ICONS = {
-  'Lunch / Coffee Voucher': '☕',
-  'Extra Day Off': '🏖️',
-  'Rs. 1000 Cash Reward': '💵',
-  'Free Course Enrollment': '🎓',
-  'Free Logo / Design Service': '🎨',
-};
-
 function Rewards() {
   const { user, refreshUser } = useAuth();
   const [rewards, setRewards] = useState([]);
@@ -90,7 +82,7 @@ function Rewards() {
         {/* Banner */}
         <div className="rewards-hero">
           <div className="rewards-hero-content">
-            <h1>🎁 Organization Rewards Catalog</h1>
+            <h1>Organization Rewards Catalog</h1>
             <p>
               Redeem your hard-earned engagement points for exciting perks, cash rewards, and vouchers across the company.
             </p>
@@ -98,7 +90,6 @@ function Rewards() {
           <div className="rewards-hero-balance">
             <span className="balance-sub">Available Balance</span>
             <div className="balance-main">
-              <span className="balance-coin">🪙</span>
               <span className="balance-number">{user?.points_balance || 0}</span>
               <span className="balance-unit">pts</span>
             </div>
@@ -108,7 +99,6 @@ function Rewards() {
         {/* Feedback message */}
         {message.text && (
           <div className={`ep-alert ${message.type === 'success' ? 'alert-success' : 'alert-error'}`}>
-            {message.type === 'success' ? '✅ ' : '⚠️ '}
             {message.text}
           </div>
         )}
@@ -119,13 +109,13 @@ function Rewards() {
             className={`rewards-tab-btn ${activeTab === 'catalog' ? 'active' : ''}`}
             onClick={() => setActiveTab('catalog')}
           >
-            🛍️ Browse Catalog ({rewards.length})
+            Browse Catalog ({rewards.length})
           </button>
           <button
             className={`rewards-tab-btn ${activeTab === 'my-redemptions' ? 'active' : ''}`}
             onClick={() => setActiveTab('my-redemptions')}
           >
-            📋 My Redemptions ({myRedemptions.length})
+            My Redemptions ({myRedemptions.length})
           </button>
         </div>
 
@@ -146,13 +136,9 @@ function Rewards() {
               return (
                 <div key={reward.id} className={`reward-card ${affordable ? 'affordable' : 'locked'}`}>
                   <div className="reward-card-header">
-                    <div className="reward-icon-box">
-                      <span className="reward-icon">
-                        {REWARD_ICONS[reward.name] || '🎁'}
-                      </span>
-                    </div>
+                    <span className="reward-badge-tag">Reward</span>
                     <span className="reward-cost">
-                      🪙 {reward.points_required} pts
+                      {reward.points_required} pts
                     </span>
                   </div>
 
@@ -165,7 +151,7 @@ function Rewards() {
                   <div className="reward-progress-box">
                     <div className="progress-info">
                       <span className="progress-label">
-                        {affordable ? '✅ Ready to Claim' : `${pointsNeeded} more pts needed`}
+                        {affordable ? 'Ready to Claim' : `${pointsNeeded} more pts needed`}
                       </span>
                       <span className="progress-pct">{percent}%</span>
                     </div>
@@ -187,7 +173,7 @@ function Rewards() {
                       </button>
                     ) : (
                       <button className="btn-locked" disabled>
-                        <span>🔒 In Progress ({percent}%)</span>
+                        <span>In Progress ({percent}%)</span>
                       </button>
                     )}
                   </div>
@@ -200,7 +186,6 @@ function Rewards() {
           <div className="redemptions-section">
             {myRedemptions.length === 0 ? (
               <div className="empty-state">
-                <div className="empty-state-icon">🎁</div>
                 <h3>No Redemptions Yet</h3>
                 <p>You haven't requested any rewards yet. Participate in the feed to earn points!</p>
                 <button className="btn-browse-catalog" onClick={() => setActiveTab('catalog')}>
@@ -223,12 +208,9 @@ function Rewards() {
                     {myRedemptions.map((item) => (
                       <tr key={item.id}>
                         <td className="font-semibold">
-                          <span className="table-reward-icon">
-                            {REWARD_ICONS[item.reward_name] || '🎁'}
-                          </span>
                           <span>{item.reward_name}</span>
                         </td>
-                        <td className="points-spent-cell">🪙 {item.points_required} pts</td>
+                        <td className="points-spent-cell">{item.points_required} pts</td>
                         <td className="date-cell">
                           {new Date(item.requested_at).toLocaleDateString()} {new Date(item.requested_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </td>
@@ -241,7 +223,7 @@ function Rewards() {
                           {item.note ? item.note : <span className="text-muted">—</span>}
                           {item.fulfilled_at && (
                             <div className="fulfilled-subtext">
-                              ✓ Fulfilled on {new Date(item.fulfilled_at).toLocaleDateString()}
+                              Fulfilled on {new Date(item.fulfilled_at).toLocaleDateString()}
                             </div>
                           )}
                         </td>
@@ -266,7 +248,7 @@ function Rewards() {
             <div className="modal-body">
               <p>
                 Are you sure you want to redeem <strong>{confirmReward.name}</strong> for{' '}
-                <strong>🪙 {confirmReward.points_required} points</strong>?
+                <strong>{confirmReward.points_required} points</strong>?
               </p>
               <div className="redeem-summary-box">
                 <div className="summary-row">
